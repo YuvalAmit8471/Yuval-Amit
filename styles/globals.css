@@ -97,3 +97,15 @@ body {
 body {
   font-family: "Inter", sans-serif;
 }
+.button-glow {
+  background: #dc2626;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 0 12px #dc2626, 0 0 24px #dc2626;
+  transition: all 0.3s ease;
+}
+.button-glow:hover {
+  background: #b91c1c;
+  box-shadow: 0 0 16px #dc2626, 0 0 32px #dc2626;
+  transform: scale(1.05);
+}

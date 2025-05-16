@@ -92,3 +92,52 @@ body {
     @apply bg-background text-foreground;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+@keyframes bgPulse {
+  0%,
+  100% {
+    background-color: #0f0f0f;
+  }
+  50% {
+    background-color: #1a1a1a;
+  }
+}
+body {
+  animation: bgPulse 10s ease-in-out infinite;
+}
+.glow-text {
+  animation: glow 4s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% {
+    color: #ff004f;
+    text-shadow: 0 0 5px #ff004f;
+  }
+  50% {
+    color: #00ffee;
+    text-shadow: 0 0 10px #00ffee;
+  }
+  100% {
+    color: #ff004f;
+    text-shadow: 0 0 5px #ff004f;
+  }
+}
+body {
+  background: linear-gradient(270deg, #0f0f0f, #1f1f1f, #0f0f0f);
+  background-size: 600% 600%;
+  animation: backgroundMove 20s ease infinite;
+}
+@keyframes backgroundMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

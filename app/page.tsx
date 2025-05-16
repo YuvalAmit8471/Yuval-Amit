@@ -93,6 +93,23 @@ const pulsateStyle = {
 };
 
 export default function Home() {
+  const rotatingPhrases = [
+    "MASCULINE ENERGY",
+    "UNBREAKABLE FOCUS",
+    "TOTAL CONTROL",
+    "RAW POWER",
+  ];
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhraseIndex(
+        (prevIndex) => (prevIndex + 1) % rotatingPhrases.length
+      );
+    }, 2500); // מחליף כל 2.5 שניות
+    return () => clearInterval(interval);
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -185,6 +202,9 @@ export default function Home() {
               }`}
             >
               MASCULINE ENERGY
+              <h2 className="text-2xl font-bold glow-text">
+                🔥 Limited-Time Offer!
+              </h2>
             </span>
           </div>
           <nav className="hidden md:flex gap-6">
@@ -225,9 +245,7 @@ export default function Home() {
               Contact
             </a>
           </nav>
-          <Button className="bg-red-700 hover:bg-red-800 text-white animate-bounce">
-            Buy Now
-          </Button>
+          <Button className="button-glow">Buy Now – $99</Button>
 
           <div className="md:hidden">
             <Button
@@ -335,6 +353,10 @@ export default function Home() {
       </div>
 
       <main className="flex-1">
+        <div className="bg-red-700 text-white text-sm text-center py-2 animate-pulse">
+          🚨 Only 3 spots left for this month! Join now.
+        </div>
+
         {/* Hero Section with Video Background */}
         <section id="hero" className="relative overflow-hidden">
           <VideoBackground />
@@ -1494,7 +1516,7 @@ export default function Home() {
                     fireMode ? "fire-text" : ""
                   }`}
                 >
-                  $100
+                  $99
                 </div>
                 <ul className="space-y-3 text-left max-w-md mx-auto mb-8">
                   <li className="flex items-center">
@@ -1735,4 +1757,37 @@ export default function Home() {
       </footer>
     </div>
   );
+  <a
+    href="#hero"
+    className="fixed bottom-4 right-4 z-50 bg-red-600 text-white p-3 rounded-full shadow-md hover:bg-red-700 md:hidden"
+  >
+    ↑
+  </a>;
 }
+<a
+  href="https://wa.me/972504448105"
+  className="fixed bottom-6 right-4 z-50 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg md:hidden"
+  target="_blank"
+>
+  Chat with us 💬
+</a>;
+<div className="text-center text-red-500 font-bold text-xl">
+  Offer ends in: <span id="countdown"></span>
+</div>;
+useEffect(() => {
+  const countdown = document.getElementById("countdown");
+  const targetDate = new Date();
+  targetDate.setHours(targetDate.getHours() + 3); // 3 שעות קדימה
+
+  const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate.getTime() - now;
+    const hours = Math.floor(distance / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    if (countdown) {
+      countdown.innerText = `${hours}h ${minutes}m ${seconds}s`;
+    }
+    if (distance < 0) clearInterval(interval);
+  }, 1000);
+}, []);
